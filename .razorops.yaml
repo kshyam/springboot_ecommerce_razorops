@@ -1,0 +1,49 @@
+version: 1
+
+stages:
+  - checkout
+  - build
+  - test
+  - deploy
+
+variables:
+  PROJECT_NAME: "springboot_ecommerce_razorops"
+  GITHUB_REPO_URL: "https://github.com/jaygajera17/E-commerce-project-springBoot.git"
+  DEPLOY_USER: "your_deploy_user"
+  DEPLOY_HOST: "your_deploy_host"
+  SSH_PRIVATE_KEY: "your_ssh_private_key"
+
+tasks:
+  checkout:
+    stage: checkout
+    steps:
+      - name: Checkout Code
+        image: alpine/git
+        commands:
+          - git clone ${GITHUB_REPO_URL}
+          - cd ${PROJECT_NAME}
+
+  build:
+    stage: build
+    steps:
+      - name: Build Project
+        image: maven:3.6.3-jdk-11
+        commands:
+          - mvn clean package
+
+  test:
+    stage: test
+    steps:
+      - name: Run Tests
+        image: maven:3.6.3-jdk-11
+        commands:
+          - mvn test
+
+  deploy:
+    stage: deploy
+    steps:
+      - name: Deploy Application
+        image: alpine
+        commands:
+          - echo "Deploying application..."
+          - scp -i ${SSH_PRIVATE_KEY} target/*.jar ${DEPLOY_USER}@${DEPLOY_HOST}:/path/to/deployment/directory
