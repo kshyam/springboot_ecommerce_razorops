@@ -4,18 +4,16 @@ global:
 
 tasks:
   build:
-    stage: build
     steps:
       - name: Build Project
-        commands:
-          - mvn clean package
+      commands:
+        - mvn clean package
 
   test:
-    stage: test
     steps:
       - name: Run Tests
-        commands:
-          - mvn test
+      commands:
+        - mvn test
 
   # deploy:
   #   stage: deploy
