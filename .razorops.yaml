@@ -3,7 +3,7 @@ global:
     os_image: ubuntu
 
 tasks:
-  build-deps:
+  build:
     runner: razorci/openjdk
     steps:
     - checkout
@@ -17,10 +17,14 @@ tasks:
         paths:
         - ~/.m2 
 
-  build-deps:
+  test:
     runner: razorci/openjdk
     steps:
     - run: mvn clean test
+
+    - reports/junit: 
+    - target/surefire-reports/TEST-*.xml
+    - target/failsafe-reports/TEST-*.xml
 
 
   # deploy:
