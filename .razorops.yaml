@@ -8,19 +8,19 @@ tasks:
     steps:
     - checkout
     - cache/pull:
-        key: maven-repo-{{ checksum "pom.xml" }}
+        key: maven-repo-{{ checksum "JtProject/pom.xml" }}
         fallback_key: maven-repo-
 
-    - run: mvn -q clean package
+    - run: cd JtProject/ && mvn -q clean package
     - cache/push:
-        key: maven-repo-{{ checksum "pom.xml" }}
+        key: maven-repo-{{ checksum "JtProject/pom.xml" }}
         paths:
         - ~/.m2 
 
   test:
-    runner: razorci/openjdk
+    runner: razorci/openjdk:buster
     steps:
-    - run: mvn clean test
+    - run: cd JtProject/ && mvn clean test
 
     - reports/junit: 
     - target/surefire-reports/TEST-*.xml
