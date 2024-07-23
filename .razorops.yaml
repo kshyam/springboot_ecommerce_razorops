@@ -20,11 +20,12 @@ tasks:
   test:
     runner: razorci/openjdk:buster
     steps:
+    - checkout
     - run: cd JtProject/ && mvn clean test
 
-    - reports/junit: 
-    - target/surefire-reports/TEST-*.xml
-    - target/failsafe-reports/TEST-*.xml
+    # - reports/junit: 
+    # - target/surefire-reports/TEST-*.xml
+    # - target/failsafe-reports/TEST-*.xml
 
 
   # deploy:
