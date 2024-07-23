@@ -5,12 +5,12 @@ global:
 tasks:
   build:
     steps:
-      commands:
+    - commands:
       - mvn clean package
 
   test:
     steps:
-      commands:
+    - commands:
       - mvn test
 
   # deploy:
