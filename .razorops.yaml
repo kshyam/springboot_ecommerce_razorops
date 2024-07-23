@@ -1,9 +1,12 @@
+global:
+  runner:
+    os_image: ubuntu
+
 tasks:
   build:
     stage: build
     steps:
       - name: Build Project
-        image: maven:3.6.3-jdk-11
         commands:
           - mvn clean package
 
@@ -11,15 +14,14 @@ tasks:
     stage: test
     steps:
       - name: Run Tests
-        image: maven:3.6.3-jdk-11
         commands:
           - mvn test
 
-  deploy:
-    stage: deploy
-    steps:
-      - name: Deploy Application
-        image: alpine
-        commands:
-          - echo "Deploying application..."
-          - scp -i ${SSH_PRIVATE_KEY} target/*.jar ${DEPLOY_USER}@${DEPLOY_HOST}:/path/to/deployment/directory
+  # deploy:
+  #   stage: deploy
+  #   steps:
+  #     - name: Deploy Application
+  #       image: alpine
+  #       commands:
+  #         - echo "Deploying application..."
+  #         - scp -i ${SSH_PRIVATE_KEY} target/*.jar ${DEPLOY_USER}@${DEPLOY_HOST}:/path/to/deployment/directory
