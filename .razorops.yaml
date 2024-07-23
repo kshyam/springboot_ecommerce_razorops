@@ -6,12 +6,12 @@ tasks:
   build:
     steps:
       commands:
-        - mvn clean package
+      - mvn clean package
 
   test:
     steps:
       commands:
-        - mvn test
+      - mvn test
 
   # deploy:
   #   stage: deploy
