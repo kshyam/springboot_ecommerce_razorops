@@ -14,14 +14,6 @@ variables:
   SSH_PRIVATE_KEY: "your_ssh_private_key"
 
 tasks:
-  checkout:
-    stage: checkout
-    steps:
-      - name: Checkout Code
-        image: alpine/git
-        commands:
-          - git clone ${GITHUB_REPO_URL}
-          - cd ${PROJECT_NAME}
 
   build:
     stage: build
