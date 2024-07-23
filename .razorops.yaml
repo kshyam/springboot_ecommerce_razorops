@@ -3,15 +3,25 @@ global:
     os_image: ubuntu
 
 tasks:
-  build:
+  build-deps:
+    runner: razorci/openjdk
     steps:
-    - commands:
-      - mvn clean package
+    - checkout
+    - cache/pull:
+        key: maven-repo-{{ checksum "pom.xml" }}
+        fallback_key: maven-repo-
 
-  test:
+    - run: mvn -q clean package
+    - cache/push:
+        key: maven-repo-{{ checksum "pom.xml" }}
+        paths:
+        - ~/.m2 
+
+  build-deps:
+    runner: razorci/openjdk
     steps:
-    - commands:
-      - mvn test
+    - run: mvn clean test
+
 
   # deploy:
   #   stage: deploy
