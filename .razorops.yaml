@@ -1,19 +1,4 @@
-version: 1
-
-stages:
-  - build
-  - test
-  - deploy
-
-variables:
-  PROJECT_NAME: "springboot_ecommerce_razorops"
-  GITHUB_REPO_URL: "https://github.com/jaygajera17/E-commerce-project-springBoot.git"
-  DEPLOY_USER: "your_deploy_user"
-  DEPLOY_HOST: "your_deploy_host"
-  SSH_PRIVATE_KEY: "your_ssh_private_key"
-
 tasks:
-
   build:
     stage: build
     steps:
