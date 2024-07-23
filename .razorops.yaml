@@ -4,7 +4,7 @@ global:
 
 tasks:
   build:
-    runner: razorci/openjdk::8-buster
+    runner: razorci/openjdk:buster
     steps:
     - checkout
     - cache/pull:
