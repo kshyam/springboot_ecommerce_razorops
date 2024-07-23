@@ -5,7 +5,6 @@ global:
 tasks:
   build:
     steps:
-      - name: Build Project
       commands:
         - mvn clean package
 
